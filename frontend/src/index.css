@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #020202;
+    color: #FFFFFF;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html.light body {
+    background-color: #F8FAF8;
+    color: #020202;
+  }
+}
+
+/* Custom sleek scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #1D3A1E;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A0FF99;
+}
+
+/* Editorial Fintech Surfaces */
+.fintech-card {
+  background: #0A120B;
+  border: 1px solid rgba(29, 58, 30, 0.8);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+html.light .fintech-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(29, 58, 30, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+}
+
+.fintech-card:hover {
+  border-color: rgba(160, 255, 153, 0.35);
+}
+
+html.light .fintech-card:hover {
+  border-color: rgba(29, 58, 30, 0.4);
+}
+
+.fintech-panel {
+  background: #060B06;
+  border: 1px solid rgba(29, 58, 30, 0.5);
+}
+
+html.light .fintech-panel {
+  background: #F2F7F2;
+  border: 1px solid rgba(29, 58, 30, 0.12);
+}
+
+/* Editorial subtle grid */
+.fintech-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(29, 58, 30, 0.2) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 58, 30, 0.2) 1px, transparent 1px);
+}
+
+html.light .fintech-grid {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(29, 58, 30, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(29, 58, 30, 0.05) 1px, transparent 1px);
+}
