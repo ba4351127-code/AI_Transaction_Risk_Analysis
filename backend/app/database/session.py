@@ -2,12 +2,24 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, Asyn
 from typing import AsyncGenerator
 from backend.app.config import settings
 
+# Normalize database URL: seamlessly supports Neon/PostgreSQL asyncpg and local SQLite
+def _get_async_database_url(url: str) -> str:
+    if url.startswith("postgres://"):
+        url = url.replace("postgres://", "postgresql+asyncpg://", 1)
+    elif url.startswith("postgresql://") and not url.startswith("postgresql+asyncpg://"):
+        url = url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    if "asyncpg" in url and "sslmode=" in url:
+        url = url.replace("sslmode=", "ssl=")
+    return url
+
+_db_url = _get_async_database_url(settings.DATABASE_URL)
+
 # Create async engine with connection pooling
 engine = create_async_engine(
-    settings.DATABASE_URL,
+    _db_url,
     echo=False,
     future=True,
-    connect_args={"check_same_thread": False, "timeout": 30.0} if "sqlite" in settings.DATABASE_URL else {}
+    connect_args={"check_same_thread": False, "timeout": 30.0} if "sqlite" in _db_url else {}
 )
 
 # Create sessionmaker
